@@ -64,6 +64,10 @@
 		public function productDot(v:Vector2D):Number {
 			return this.x * v.x + this.y * v.y;
 		}
+
+		public function perpendicular():Vector2D {
+			return new Vector2D(-this.y, this.x);
+		}
 		
 		public function toString():String {
 			return "(" + this.x + ", " + this.y + ")";

@@ -16,7 +16,7 @@ package  {
         var ballGraphic:MovieClip = new (getDefinitionByName(linkageId) as Class)();
         this.addChild(ballGraphic);
       }
-      radius = Math.random() * 20 + 10;
+      radius = Math.random() * 10 + 20;
       mass = 1 * radius;
       position = new Vector2D();
       velocity = new Vector2D();
