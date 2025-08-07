@@ -2,7 +2,7 @@ package {
   import flash.display.MovieClip;
   import flash.utils.getDefinitionByName;
   public class Flipper extends MovieClip {
-    private const FLIPPER_SPEED:Number = 0.05;
+    private const FLIPPER_SPEED:Number = 0.025;
     public var position:Vector2D;
     public var length:Number;
     public var angle:Number; // in radians
@@ -65,8 +65,7 @@ package {
       );
     }
 
-    public function handleBallCollision(ball:Ball):void
-    {
+    public function handleBallCollision(ball:Ball):void{
       var flipperEnd:Vector2D = getEndPosition();
       var flipperVector:Vector2D;
       // For right flipper, reverse the vector direction.
@@ -93,12 +92,12 @@ package {
       var n:Vector2D = new Vector2D(ball.position.x - closestPoint.x, ball.position.y - closestPoint.y);
       var distance:Number = n.length();
 
-      if (distance >= ball.radius*1.2 || distance == 0) return;
+      if (distance >= ball.radius * 1.2 || distance == 0) return;
 
       n.scale(1 / distance);
 
       // Separate overlapping ball and flipper.
-      var overlap:Number = ball.radius*1.2 - distance;
+      var overlap:Number = ball.radius * 1.2 - distance;
       ball.position.x += n.x * overlap;
       ball.position.y += n.y * overlap;
 
@@ -107,7 +106,7 @@ package {
       if (speed > 0) return;
       ball.velocity.x -= ball.restitution * speed * n.x;
       ball.velocity.y -= ball.restitution * speed * n.y;
-      if(angle != minAngle && angle != maxAngle) {
+      if(angle != maxAngle && angle != minAngle) {
         var additionalForce:Vector2D = new Vector2D(n.x * 10, n.y * 20 - 5);
         ball.velocity.add(additionalForce);
       }

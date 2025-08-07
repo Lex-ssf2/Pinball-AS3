@@ -4,7 +4,7 @@ package {
   public class Bumpers extends MovieClip{
     public var position:Vector2D;
     public var radius:Number;
-    public var restitution:Number = 1.5;
+    public var restitution:Number = 2;
 
     public function Bumpers(x:Number, y:Number, radius:Number, linkageId:String = "bumper") {
       this.position = new Vector2D(x, y);

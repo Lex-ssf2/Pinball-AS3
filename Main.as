@@ -10,6 +10,7 @@
 		private var balls:Array = [];
 		private var bumpers:Array = [];
 		private var flippers:Array = [];
+		private var terrain:Array = [];
 		public function Main() {
 			initialize();
       addEventListener(Event.ENTER_FRAME, onEnterFrame);
@@ -17,6 +18,10 @@
 
 		private function initialize():void
 		{
+			terrain.push(new PinballStage("pinballStageGraphic"));
+			for each (var wall:PinballStage in terrain) {
+				addChild(wall);
+			}
 			for (var i:int = 0; i < 10; i++) {
 				var ball:Ball = new Ball();
 				ball.position.x = Math.random() * stage.stageWidth;
@@ -24,11 +29,17 @@
 				balls.push(ball);
 				addChild(ball);
 			}
-			var bumper:Bumpers = new Bumpers(200, 400, 30,"testBall");
+			var bumper:Bumpers = new Bumpers(60, 400, 30,"testBall");
 			bumpers.push(bumper);
 			addChild(bumper);
-			var leftFlipper:Flipper = new Flipper(100, 350, 100, true,"testBall");
-			var rightFlipper:Flipper = new Flipper(300, 350, 100, false,"testBall");
+			bumper= new Bumpers(550, 400, 30,"testBall");
+			bumpers.push(bumper);
+			addChild(bumper);
+			bumper= new Bumpers(300, 200, 30,"testBall");
+			bumpers.push(bumper);
+			addChild(bumper);
+			var leftFlipper:Flipper = new Flipper(50, 350, 150, true,"testBall");
+			var rightFlipper:Flipper = new Flipper(550, 350, 150, false,"testBall");
 			flippers.push(leftFlipper);
 			flippers.push(rightFlipper);
 			addChild(leftFlipper);
@@ -75,7 +86,7 @@
     {
 			for each (var ball:Ball in balls) {
 				ball.update();
-				ball.handleWallCollision(stage.stageWidth, stage.stageHeight);
+				ball.handleWallCollision(terrain);
 				for each (var bumper:Bumpers in bumpers) {
 					bumper.handleBallCollision(ball);
 				}
